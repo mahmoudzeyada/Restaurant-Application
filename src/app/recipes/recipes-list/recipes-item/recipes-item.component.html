@@ -1,0 +1,21 @@
+<div class="list-group" (click)="onSelected()">
+  <a
+    [routerLink]="['./', recipe.name]"
+    routerLinkActive="active"
+    style="cursor: pointer;"
+    class="list-group-item list-group-item-action flex-column align-items-start"
+  >
+    <div class="d-flex justify-content-between">
+      <h5 class="mb-1">{{ recipe.name }}</h5>
+    </div>
+    <div class="d-flex flex-row align-items-center justify-content-between">
+      <p>{{ recipe.description }}</p>
+      <img
+        [src]="recipe.imagePath"
+        [alt]="recipe.description"
+        class="rounded"
+        style="max-height: 100px;"
+      />
+    </div>
+  </a>
+</div>

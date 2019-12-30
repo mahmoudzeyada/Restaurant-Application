@@ -1,0 +1,49 @@
+<nav class="navbar navbar-default  navbar-expand navbar-light bg-light">
+  <a href="#" class="navbar-brand">Shopping</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          [routerLink]="['/recipes']"
+          routerLinkActive="active"
+          class="nav-link"
+          >Recipes</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          [routerLink]="['/shopping-list']"
+          routerLinkActive="active"
+          class="nav-link"
+          >Shopping List</a
+        >
+      </li>
+    </ul>
+    <div class="d-flex">
+      <div class="dropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              (click)="isOpen = !isOpen"
+              role="button"
+              >Manage</a
+            >
+
+            <div
+              class="dropdown-menu"
+              [ngClass]="{ show: isOpen }"
+              aria-labelledby="navbarDropdown"
+              (click)="isOpen = !isOpen"
+            >
+              <a class="dropdown-item" href="#">LOAD Data</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Fetch Data</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
