@@ -14,7 +14,8 @@
   <div class="col-12">
     <app-recipes-item
       [recipe]="recipe"
-      *ngFor="let recipe of recipes"
+      *ngFor="let recipe of recipes; let i = index"
+      [index]="i"
     ></app-recipes-item>
   </div>
 </div>

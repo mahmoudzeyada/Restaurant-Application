@@ -1,25 +1,25 @@
 <div class="row">
   <div class="col-12">
-    <form>
+    <form [formGroup] = "form" (submit) ="onAdd()">
       <div class="row">
         <div class="col-sm-7 form-group">
           <label for="name">Name</label>
-          <input #nameInput type="text" id="name" class="form-control" />
+          <input formControlName="name" type="text" id="name" class="form-control" />
         </div>
         <div class="col-sm-3 form-group">
           <label for="amount">Amount</label>
-          <input #amountInput type="number" id="amount" class="form-control" />
+          <input formControlName="amount" type="number" id="amount" class="form-control" />
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-          <button type="submit" class="btn btn-success" (click)="onAdd()">
-            ADD
+          <button type="submit" class="btn btn-success" [disabled] = "!form.valid">
+            {{editMode ? 'Update' : 'Add'}}
           </button>
-          <button type="submit" class="btn btn-danger" (click)="onDelete()">
+          <button type="button" class="btn btn-danger" (click)="onDelete()" *ngIf="editMode">
             Delete
           </button>
-          <button type="submit" class="btn btn-primary">clear</button>
+          <button type="button" class="btn btn-primary" (click)="onClear()">clear</button>
         </div>
       </div>
     </form>

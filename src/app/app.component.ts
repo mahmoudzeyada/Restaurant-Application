@@ -1,50 +1,16 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { AuthService } from "./auth/auth.service";
 
-import { ServersService } from "./servers/servers.service";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  providers: [ServersService]
+  providers: []
 })
-export class AppComponent {
-  title = "angualr-learn";
-  servers = [];
-  element = 0;
-  rec = false;
-  shop = false;
+export class AppComponent implements OnInit {
+  constructor(private authService: AuthService) {}
 
-  onBlue(serverData: {
-    serverType: string;
-    serverName: string;
-    serverContent: string;
-  }) {
-    this.servers.push({
-      type: serverData.serverType,
-      content: serverData.serverContent,
-      name: serverData.serverName
-    });
-  }
-
-  onNormal(serverData: {
-    serverType: string;
-    serverName: string;
-    serverContent: string;
-  }) {
-    this.servers.push({
-      type: serverData.serverType,
-      content: serverData.serverContent,
-      name: serverData.serverName
-    });
-  }
-
-  toggleRec(rec: boolean): void {
-    this.rec = true;
-    this.shop = false;
-  }
-
-  toggleShop(rec: boolean): void {
-    this.rec = false;
-    this.shop = true;
+  ngOnInit() {
+    this.authService.autoLogIn();
   }
 }

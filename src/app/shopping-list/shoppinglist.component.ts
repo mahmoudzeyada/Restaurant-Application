@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from "@angular/core";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "./shoppinglist.service";
 import { Subscription } from "rxjs";
@@ -13,6 +13,10 @@ export class ShoppinglistComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[] = [];
   onActive = false;
   igChangedSyb: Subscription;
+  selectedRecipe: number = -1;
+
+  @ViewChild('recipesList', {static: false})
+  private recipesList: ElementRef<HTMLElement>
 
   constructor(private shoppingListService: ShoppingListService) {}
   ngOnInit(): void {
@@ -27,7 +31,8 @@ export class ShoppinglistComponent implements OnInit, OnDestroy {
     this.igChangedSyb.unsubscribe();
   }
 
-  onAdd() {
-    this.onActive = !this.onActive;
+  onAdd(index: number) {
+    this.selectedRecipe = index;
+    this.shoppingListService.ingredientSelected$.next(index);
   }
 }

@@ -12,6 +12,13 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
+  ingredientSelected$ = new Subject<number>();
+
+  updateIngredient(index: number, modifiedIngredient: Ingredient): void {
+    this.ingredients[index] = modifiedIngredient;
+    this.ingredientsChanged$.next(this.ingredients.slice());
+  }
+
   addIngredient(ingredient: Ingredient): void {
     const foundEl = this.ingredients.find(
       item => item.name === ingredient.name

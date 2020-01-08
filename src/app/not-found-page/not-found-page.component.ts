@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data } from "@angular/router";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable, Subject, BehaviorSubject, of, interval } from "rxjs";
+import { map, take, concatMap } from "rxjs/operators";
 
 @Component({
   selector: "app-not-found-page",
@@ -18,27 +18,16 @@ export class NotFoundPageComponent implements OnInit {
       console.log(data.message);
     });
 
-    const observable = new Observable(subscriber => {
-      let counter = 0;
-      setInterval(() => {
-        subscriber.next(counter);
-        counter++;
-        if (counter > 3) {
-          subscriber.error("greater than 3");
-        }
-      }, 500);
-    });
+    console.log("hi");
+    let ranNum = new BehaviorSubject<number>(null);
 
-    observable.pipe(map((data: number) => `round:${data + 1}`)).subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.log(err);
-      },
-      () => {
-        console.log("done");
-      }
-    );    
+    ranNum.subscribe(num => console.log("observer1" + " " + num));
+    ranNum.subscribe(num => console.log("observer2" + " " + num));
+    ranNum.subscribe(num => console.log("observer3" + " " + num));
+
+    ranNum.pipe(take(1)).subscribe(num => console.log("observer4" + " " + num));
+
+    ranNum.next(1);
+    ranNum.next(2);
   }
 }

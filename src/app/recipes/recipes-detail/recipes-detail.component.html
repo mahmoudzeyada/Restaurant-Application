@@ -32,7 +32,12 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" [routerLink]="['edit']">Edit Recipe</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#">Delete Recipe</a>
+        <a
+          class="dropdown-item"
+          (click)="onDelete(recipeId)"
+          style="cursor: pointer"
+          >Delete Recipe</a
+        >
       </ul>
     </div>
   </div>

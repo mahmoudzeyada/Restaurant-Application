@@ -1,1 +1,101 @@
-<p>recipe-edit works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col col-12">
+      <button
+        type="submit"
+        class="btn btn-outline-success mr-1"
+        [disabled]="!form.valid"
+      >
+        Save
+      </button>
+      <button class="btn btn-outline-danger" (click)="onCancel()" type="button">
+        cancel
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-12">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          formControlName="name"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-12">
+      <div class="form-group">
+        <label for="imageUrl">Image Url</label>
+        <input
+          type="text"
+          id="imageUrl"
+          class="form-control"
+          formControlName="imagePath"
+          #imagePath
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-12">
+      <div class="form-group">
+        <img [src]="imagePath.value" class="img-fluid" />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-12">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          class="form-control"
+          rows="6"
+          formControlName="description"
+        >
+        </textarea>
+      </div>
+    </div>
+  </div>
+  <div formArrayName="ingredients">
+    <div
+      class="row"
+      *ngFor="let ingredient of form.get('ingredients').controls; let i = index"
+      [formGroupName]="i"
+    >
+      <div class="col-6">
+        <div class="form-group">
+          <label [for]="getRandomIdName(i)">Ingredient Name</label>
+          <input
+            type="text"
+            [id]="getRandomIdName(i)"
+            class="form-control"
+            formControlName="name"
+          />
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label [for]="getRandomIdAmount(i)">amount</label>
+          <input
+            type="text"
+            [id]="getRandomIdAmount(i)"
+            class="form-control"
+            formControlName="amount"
+          />
+        </div>
+      </div>
+      <div class="col-2">
+        <label [for]="i">Remove</label>
+        <button [id]="i" class="btn btn-danger" (click)="onRemove(i)">X</button>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-success" type="button" (click)="onAdd()">
+    add ingredient
+  </button>
+</form>

@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <app-alert *ngIf="alertService.err"></app-alert>
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            required
+            email
+            ngModel
+            name="email"
+          />
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            required
+            ngModel
+            name="password"
+            minlength="6"
+          />
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <button
+          class="btn btn-outline-primary"
+          type="submit"
+          [disabled]="!form.valid"
+        >
+          {{ isSignInMode ? "SignIn" : "SignUp" }}
+        </button>
+        |
+        <button
+          class="btn btn-outline-primary"
+          type="button"
+          (click)="isSignInMode = !isSignInMode"
+        >
+          Switch to {{ isSignInMode ? "SignUp" : "SignIn" }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
